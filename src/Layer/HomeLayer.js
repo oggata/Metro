@@ -17,7 +17,11 @@ var HomeLayer = cc.Layer.extend({
 
     init:function () {
 
+        playBGM();
+
         this.status = "tutorial"; //tutorial -> start -> gaming -> finish -> result
+        this.isRainy = false;
+        this.isRainyTime = 0;
 
         this.startCountDown = 0;
         this.gameFinishedTime = 0;
@@ -40,6 +44,7 @@ var HomeLayer = cc.Layer.extend({
         this.fallingTime = 0;
         this.carPosArr   = [];
         this.stations    = [];
+        this.rains    = [];
 
         this.buildingsPosX = 0;
         this.carPosY = 100;
@@ -54,7 +59,6 @@ var HomeLayer = cc.Layer.extend({
         this.rectBaseSunset = cc.LayerColor.create(cc.c4b(255,140,0,255 * 0),640,960);
         this.rectBaseSunset.setAnchorPoint(0,0);
         this.mapNode.addChild(this.rectBaseSunset);
-
         this.rectBaseAfternoonOpacityRate = 0;
         this.rectBaseAfternoon = cc.LayerColor.create(cc.c4b(135,206,250,255 * 0),640,960);
         this.rectBaseAfternoon.setAnchorPoint(0,0);
@@ -63,6 +67,25 @@ var HomeLayer = cc.Layer.extend({
         this.buildings = cc.Sprite.create("sprite/buildings.png");
         this.buildings.setAnchorPoint(0,0);
         this.mapNode.addChild(this.buildings);
+
+        //バトルエフェクト
+        var frameSeqEffect= [];
+        for (var y = 0; y < 13; y++) {
+            for (var x = 0; x < 1; x++) {
+                var frame = cc.SpriteFrame.create("sprite/pipo-btleffect076.png",cc.rect(640*x,240*y,640,240));
+                frameSeqEffect.push(frame);
+            }
+        }
+        this.rainWa = cc.Animation.create(frameSeqEffect,0.1);
+        this.rainRa = cc.RepeatForever.create(cc.Animate.create(this.rainWa));
+        this.rainEffect = cc.Sprite.create("sprite/pipo-btleffect076.png",cc.rect(0,0,640,240));
+        this.rainEffect.runAction(this.rainRa);
+        this.rainEffect.setScale(1,3.5);
+        this.rainEffect.setOpacity(255*0.67);
+        this.rainEffect.setAnchorPoint(0,0);
+        this.rainEffect.setPosition(0,0);
+        this.mapNode.addChild(this.rainEffect);
+        this.rainEffect.setVisible(false);
 
         this.car = cc.Sprite.create("sprite/car.png");
         this.mapNode.addChild(this.car);
@@ -95,7 +118,6 @@ var HomeLayer = cc.Layer.extend({
         this.mapNode.addChild(this.car10);
 
         this.resp = getTrainData();
-//cc.log(this.resp);
 
         //バトルエフェクト
         var frameSeqEffect2= [];
@@ -164,7 +186,6 @@ var HomeLayer = cc.Layer.extend({
         this.resultLabel.setAnchorPoint(0.5,0);
         this.resultBack.addChild(this.resultLabel);
 
-
         var startButton = cc.MenuItemImage.create(
             "button/next.png",
             "button/next.png",
@@ -192,6 +213,16 @@ var HomeLayer = cc.Layer.extend({
     },
 
     update:function(dt){
+
+        //天候を制御する
+        if(this.isRainy){
+            this.isRainyTime++;
+            if(this.isRainyTime > 30 * 5){
+                this.isRainyTime = 0; 
+                this.isRainy = false;  
+            }
+        }
+        this.rainEffect.setVisible(this.isRainy);
 
         this.car.setPosition(320,this.carPosY);
         this.carPosArr.push(this.carPosY);
@@ -233,8 +264,25 @@ var HomeLayer = cc.Layer.extend({
             this.gameFinishedTime++;
             if(this.gameFinishedTime>=30*2){
                 this.status = "result";
+                if(this.sumPassangerCnt>=5000000){
+                    //1000万人
+                    this.rankLabel.setString("Sランク\n<1000万人以上>");
+                }else if(this.sumPassangerCnt>=5000000){
+                    //500万人
+                    this.rankLabel.setString("Aランク\n<500万人以上>");
+                }else　if(this.sumPassangerCnt>=1000000){
+                    //100万人
+                    this.rankLabel.setString("Bランク\n<100万人以上>");
+                }else if(this.sumPassangerCnt>=100000){
+                    //10万人
+                    this.rankLabel.setString("Cランク\n<10万人以上>");
+                }else if(this.sumPassangerCnt>=10000){
+                    //1万人以下
+                    this.rankLabel.setString("Dランク\n<1万人以上>");
+                }else{
+                    this.rankLabel.setString("Fランク\n<1万人以下>");
+                }
                 this.resultLabel.setString(this.sumPassangerCnt + "人");
-
                 this.finishBack.setVisible(false);
                 this.resultBack.setVisible(true);
             }else{
@@ -312,7 +360,6 @@ var HomeLayer = cc.Layer.extend({
 
         this.addStationIntervalTime++;
 
-        //getRandNumberFromRange(100,700)
         if(this.addStationIntervalTime>=this.addStationMaxIntervalTime){
 
             this.addStationMaxIntervalTime = getRandNumberFromRange(20,60)
@@ -327,17 +374,41 @@ var HomeLayer = cc.Layer.extend({
 
             this.mapNode.addChild(this.station);
             this.stations.push(this.station);
+
+            var _rainRandNum = getRandNumberFromRange(1,3);
+            if(_rainRandNum == 1){
+                this.rain = new Rain(
+                    this
+                );
+                this.mapNode.addChild(this.rain,1);
+                this.rains.push(this.rain);
+            }
         }
 
-        if(this.pushingTime>=1){
-            this.pushingTime++;
-            this.carPosY+=this.pushingTime/2;
-        }
-        if(this.fallingTime>=1){
-            this.fallingTime++;
-            this.carPosY-=this.fallingTime/2;
-            if(this.carPosY<=100){
-                this.carPosY=100;
+
+        if(this.isRainy){
+            if(this.pushingTime>=1){
+                this.pushingTime++;
+                this.carPosY+=this.pushingTime/12;
+            }
+            if(this.fallingTime>=1){
+                this.fallingTime++;
+                this.carPosY-=this.fallingTime/1;
+                if(this.carPosY<=100){
+                    this.carPosY=100;
+                }
+            }
+        }else{
+            if(this.pushingTime>=1){
+                this.pushingTime++;
+                this.carPosY+=this.pushingTime/2;
+            }
+            if(this.fallingTime>=1){
+                this.fallingTime++;
+                this.carPosY-=this.fallingTime/2;
+                if(this.carPosY<=100){
+                    this.carPosY=100;
+                }
             }
         }
 
@@ -350,12 +421,26 @@ var HomeLayer = cc.Layer.extend({
         var distance = 0;
         for(var i=0;i<this.stations.length;i++){
             distance = cc.pDistance(this.car.getPosition(),this.stations[i].getPosition());
-            if(distance <= 100){
+            if(distance <= 100 && this.stations[i].isHit == false){
                 this.stations[i].isHit = true;
+                playSE(s_se_001);
             }
             if(!this.stations[i].update()){
                 this.removeChild(this.stations[i]);
                 this.stations.splice(i, 1);
+            }
+        }
+
+        var distance2 = 0;
+        for(var i=0;i<this.rains.length;i++){
+            distance2 = cc.pDistance(this.car.getPosition(),this.rains[i].getPosition());
+            if(distance2 <= 80 && this.rains[i].isHit == false){
+                this.rains[i].isHit = true;
+                playSE(s_se_002);
+            }
+            if(!this.rains[i].update()){
+                this.removeChild(this.rains[i]);
+                this.rains.splice(i, 1);
             }
         }
     },
@@ -367,6 +452,7 @@ var HomeLayer = cc.Layer.extend({
 
         if(this.status == "result"){
             this.goToSysMenuLayer();
+            playSystemButton();
         }
     },
 
@@ -381,6 +467,7 @@ var HomeLayer = cc.Layer.extend({
 
     onGameStart:function (){
         this.status = "start"
+        playSystemButton();
     },
 
     goToSysMenuLayer:function (stageNum) {

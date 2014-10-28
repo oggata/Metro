@@ -172,6 +172,7 @@ var SysMenu = cc.Layer.extend({
     //デバイス入力----->
     onTouchesBegan:function (touches, event) {
         this.touched = touches[0].getLocation();
+        playSystemButton();
         this.goToHomeLayer();
     },
 

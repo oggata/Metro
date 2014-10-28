@@ -14,9 +14,15 @@ var metro_station_resp = "dict_station/PassengerSurveyResp.json";
 var s_screen = "back/screen.png";
 var s_init               = "init.png";
 var s_bgm_001            = "res/sound/bgm/bgm_maoudamashii_acoustic07.mp3";
+var s_se_system          = "res/sound/se/se_maoudamashii_onepoint24.mp3";
+var s_se_001             = "res/sound/se/se_maoudamashii_onepoint12.mp3";
+var s_se_002             = "res/sound/se/se_maoudamashii_onepoint06.mp3";
+
 var s_effect = "sprite/pipo-btleffect096.png";
+var s_rain   = "sprite/pipo-btleffect076.png";
 
 var g_system_resources = [
     s_screen,
-    s_effect
+    s_effect,
+    s_rain
 ];

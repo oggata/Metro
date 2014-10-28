@@ -42,6 +42,7 @@
             'src/resource.js',
             'src/Config/GameConfig.js',
             'src/Sprite/Station.js',
+            'src/Sprite/Rain.js',
             'src/Layer/SysMenu.js',
             'src/Layer/HomeLayer.js',
             'src/Util/HttpClient.js',

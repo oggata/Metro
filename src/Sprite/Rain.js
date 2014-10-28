@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 http://oggata.github.io All rights reserved.
 //
 
-var Station = cc.Node.extend({
-    ctor:function (game,stationName,passangerNum) {
+var Rain = cc.Node.extend({
+    ctor:function (game) {
         this._super();
         this.game  = game;
         this.isHit = false;
@@ -21,22 +21,12 @@ var Station = cc.Node.extend({
             this.speed = getRandNumberFromRange(3,15);
         }
 
-        this.stationName = this.game.storage.stationDict[stationName];
-        this.passangerNum = passangerNum;
-
         this.mapX = 320*2;
         this.mapY = getRandNumberFromRange(100,700);
+        this.rain = cc.Sprite.create("sprite/rain.png");
+        this.addChild(this.rain);
 
-        this.station = cc.Sprite.create("sprite/station.png");
-        this.addChild(this.station);
-
-        this.nameLabel = createLabel(this.stationName,30,0,10);
-        this.addChild(this.nameLabel);
-
-        this.passengerNumLabel = createLabel(passangerNum,20,0,-20);
-        this.addChild(this.passengerNumLabel);
-
-        this.setPosition(500,this.mapY);
+        this.setPosition(this.mapX,this.mapY);
     },
 
     update:function(){
@@ -46,11 +36,12 @@ var Station = cc.Node.extend({
             this.hitTime++;
             var rate = 1-this.hitTime*0.08;
             if(rate<0){rate = 0}
-            this.station.setOpacity(255*rate);
-            this.nameLabel.setOpacity(255*rate);
-            this.passengerNumLabel.setOpacity(255*rate);
-            if(this.hitTime>=30){
-                this.game.sumPassangerCnt+=this.passangerNum;
+            this.rain.setOpacity(255*rate);
+            //this.nameLabel.setOpacity(255*rate);
+            //this.passengerNumLabel.setOpacity(255*rate);
+            if(this.hitTime>=15){
+                //this.game.sumPassangerCnt+=this.passangerNum;
+                this.game.isRainy = true;
                 return false;
             }
         }
