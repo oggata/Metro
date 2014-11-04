@@ -28,7 +28,13 @@ var playSE = function(sound){
     this.audioEngine.setEffectsVolume(CONFIG.SE_VOLUME);
 };
 
+var stopBGM = function(sound){
+    this.audioEngine = cc.AudioEngine.getInstance();
+    this.audioEngine.stopMusic();
+};
+
 var stopSE = function(sound){
+    this.audioEngine = cc.AudioEngine.getInstance();
     this.audioEngine.stopAllEffects();
 };
 

@@ -23,7 +23,7 @@ var Rain = cc.Node.extend({
 
         this.mapX = 320*2;
         this.mapY = getRandNumberFromRange(100,700);
-        this.rain = cc.Sprite.create("sprite/rain.png");
+        this.rain = cc.Sprite.create(s_sprite_rain);
         this.addChild(this.rain);
 
         this.setPosition(this.mapX,this.mapY);

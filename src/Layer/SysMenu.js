@@ -12,6 +12,8 @@ var responses  = [];
 var SysMenu = cc.Layer.extend({
 
     init:function () {
+
+        stopBGM();
         //3:android 4:iphone 5:ipad 100:mobile_web 101:pc_web
         var platform = cc.Application.getInstance().getTargetPlatform();
         this.storage = new Storage();  
@@ -57,34 +59,34 @@ var SysMenu = cc.Layer.extend({
         this.mapNode = cc.Node.create();
         this.addChild(this.mapNode);
 
-        this.car = cc.Sprite.create("sprite/car.png");
+        this.car = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car);
 
-        this.car2 = cc.Sprite.create("sprite/car.png");
+        this.car2 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car2);
 
-        this.car3 = cc.Sprite.create("sprite/car.png");
+        this.car3 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car3);
 
-        this.car4 = cc.Sprite.create("sprite/car.png");
+        this.car4 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car4);
 
-        this.car5 = cc.Sprite.create("sprite/car.png");
+        this.car5 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car5);
 
-        this.car6 = cc.Sprite.create("sprite/car.png");
+        this.car6 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car6);
 
-        this.car7 = cc.Sprite.create("sprite/car.png");
+        this.car7 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car7);
 
-        this.car8 = cc.Sprite.create("sprite/car.png");
+        this.car8 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car8);
 
-        this.car9 = cc.Sprite.create("sprite/car.png");
+        this.car9 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car9);
 
-        this.car10 = cc.Sprite.create("sprite/car.png");
+        this.car10 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car10);
 
         this.car.setPosition(this.carPosX,this.carPosY);
@@ -102,13 +104,13 @@ var SysMenu = cc.Layer.extend({
         var frameSeqEffect2= [];
         for (var y = 0; y <= 0; y++) {
             for (var x = 0; x < 10; x++) {
-                var frame = cc.SpriteFrame.create("sprite/pipo-btleffect096.png",cc.rect(3240/9*x,240*y,3240/9,240));
+                var frame = cc.SpriteFrame.create(s_effect,cc.rect(3240/9*x,240*y,3240/9,240));
                 frameSeqEffect2.push(frame);
             }
         }
         this.wa = cc.Animation.create(frameSeqEffect2,0.1);
         this.ra = cc.RepeatForever.create(cc.Animate.create(this.wa));
-        this.effect = cc.Sprite.create("sprite/pipo-btleffect096.png",cc.rect(0,0,3240/9,240));
+        this.effect = cc.Sprite.create(s_effect,cc.rect(0,0,3240/9,240));
         this.effect.runAction(this.ra);
         this.effect.setScale(1.5,1.5);
         this.effect.setPosition(-100,10);

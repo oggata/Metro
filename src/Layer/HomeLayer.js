@@ -64,7 +64,7 @@ var HomeLayer = cc.Layer.extend({
         this.rectBaseAfternoon.setAnchorPoint(0,0);
         this.mapNode.addChild(this.rectBaseAfternoon);
 
-        this.buildings = cc.Sprite.create("sprite/buildings.png");
+        this.buildings = cc.Sprite.create(s_sprite_buildings);
         this.buildings.setAnchorPoint(0,0);
         this.mapNode.addChild(this.buildings);
 
@@ -72,13 +72,13 @@ var HomeLayer = cc.Layer.extend({
         var frameSeqEffect= [];
         for (var y = 0; y < 13; y++) {
             for (var x = 0; x < 1; x++) {
-                var frame = cc.SpriteFrame.create("sprite/pipo-btleffect076.png",cc.rect(640*x,240*y,640,240));
+                var frame = cc.SpriteFrame.create(s_rain,cc.rect(640*x,240*y,640,240));
                 frameSeqEffect.push(frame);
             }
         }
         this.rainWa = cc.Animation.create(frameSeqEffect,0.1);
         this.rainRa = cc.RepeatForever.create(cc.Animate.create(this.rainWa));
-        this.rainEffect = cc.Sprite.create("sprite/pipo-btleffect076.png",cc.rect(0,0,640,240));
+        this.rainEffect = cc.Sprite.create(s_rain,cc.rect(0,0,640,240));
         this.rainEffect.runAction(this.rainRa);
         this.rainEffect.setScale(1,3.5);
         this.rainEffect.setOpacity(255*0.67);
@@ -87,34 +87,34 @@ var HomeLayer = cc.Layer.extend({
         this.mapNode.addChild(this.rainEffect);
         this.rainEffect.setVisible(false);
 
-        this.car = cc.Sprite.create("sprite/car.png");
+        this.car = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car);
 
-        this.car2 = cc.Sprite.create("sprite/car.png");
+        this.car2 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car2);
 
-        this.car3 = cc.Sprite.create("sprite/car.png");
+        this.car3 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car3);
 
-        this.car4 = cc.Sprite.create("sprite/car.png");
+        this.car4 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car4);
 
-        this.car5 = cc.Sprite.create("sprite/car.png");
+        this.car5 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car5);
 
-        this.car6 = cc.Sprite.create("sprite/car.png");
+        this.car6 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car6);
 
-        this.car7 = cc.Sprite.create("sprite/car.png");
+        this.car7 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car7);
 
-        this.car8 = cc.Sprite.create("sprite/car.png");
+        this.car8 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car8);
 
-        this.car9 = cc.Sprite.create("sprite/car.png");
+        this.car9 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car9);
 
-        this.car10 = cc.Sprite.create("sprite/car.png");
+        this.car10 = cc.Sprite.create(s_sprite_car);
         this.mapNode.addChild(this.car10);
 
         this.resp = getTrainData();
@@ -123,20 +123,20 @@ var HomeLayer = cc.Layer.extend({
         var frameSeqEffect2= [];
         for (var y = 0; y <= 0; y++) {
             for (var x = 0; x < 10; x++) {
-                var frame = cc.SpriteFrame.create("sprite/pipo-btleffect096.png",cc.rect(3240/9*x,240*y,3240/9,240));
+                var frame = cc.SpriteFrame.create(s_effect,cc.rect(3240/9*x,240*y,3240/9,240));
                 frameSeqEffect2.push(frame);
             }
         }
         this.wa = cc.Animation.create(frameSeqEffect2,0.1);
         this.ra = cc.RepeatForever.create(cc.Animate.create(this.wa));
-        this.effect = cc.Sprite.create("sprite/pipo-btleffect096.png",cc.rect(0,0,3240/9,240));
+        this.effect = cc.Sprite.create(s_effect,cc.rect(0,0,3240/9,240));
         this.effect.runAction(this.ra);
         this.effect.setScale(1.5,1.5);
         this.effect.setPosition(-100,10);
         this.car.addChild(this.effect);
 
         //ヘッダ
-        this.header = cc.Sprite.create("back/header.png");
+        this.header = cc.Sprite.create(s_back_header);
         this.header.setAnchorPoint(0,0);
         this.header.setPosition(0,830);
         this.addChild(this.header);
@@ -154,7 +154,7 @@ var HomeLayer = cc.Layer.extend({
         this.tutorialBack.setAnchorPoint(0,0);
         this.addChild(this.tutorialBack);
 
-        this.tutorialWindow = cc.Sprite.create("back/tutorial.png");
+        this.tutorialWindow = cc.Sprite.create(s_back_tutorial);
         this.tutorialWindow.setAnchorPoint(0,0);
         this.tutorialBack.addChild(this.tutorialWindow);
 
@@ -164,7 +164,7 @@ var HomeLayer = cc.Layer.extend({
         this.addChild(this.finishBack);
         this.finishBack.setVisible(false);
 
-        this.resultWindow = cc.Sprite.create("back/finish.png");
+        this.resultWindow = cc.Sprite.create(s_back_finish);
         this.resultWindow.setAnchorPoint(0,0);
         this.finishBack.addChild(this.resultWindow);
 
@@ -174,7 +174,7 @@ var HomeLayer = cc.Layer.extend({
         this.addChild(this.resultBack);
         this.resultBack.setVisible(false);
 
-        this.resultWindow = cc.Sprite.create("back/result.png");
+        this.resultWindow = cc.Sprite.create(s_back_result);
         this.resultWindow.setAnchorPoint(0,0);
         this.resultBack.addChild(this.resultWindow);
 
@@ -187,8 +187,8 @@ var HomeLayer = cc.Layer.extend({
         this.resultBack.addChild(this.resultLabel);
 
         var startButton = cc.MenuItemImage.create(
-            "button/next.png",
-            "button/next.png",
+            s_button_next,
+            s_button_next,
             this.onGameStart,
             this
         );

@@ -29,7 +29,7 @@
     var c = {
         COCOS2D_DEBUG:1, //0 to turn debug off, 1 for basic debug, and 2 for full debug
         box2d:false,
-        chipmunk:true,
+        chipmunk:false,
         showFPS:false,
         loadExtension:false,
         frameRate:30,
