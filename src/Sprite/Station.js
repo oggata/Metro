@@ -27,7 +27,7 @@ var Station = cc.Node.extend({
         this.mapX = 320*2;
         this.mapY = getRandNumberFromRange(100,700);
 
-        this.station = cc.Sprite.create("sprite/station.png");
+        this.station = cc.Sprite.create(s_sprite_station);
         this.addChild(this.station);
 
         this.nameLabel = createLabel(this.stationName,30,0,10);

@@ -9,17 +9,14 @@
 
 ### 使用素材 ###
 
-	ひみつ(Urochi)
-	http://uros.web.fc2.com
-
-	ドット絵世界
-	http://yms.main.jp/index.html
-
 	ぴぽや
-	http://piposozai.blog76.fc2.com
+	http://piposozai.blog76.fc2.com/
 
-	魔王魂
-	http://maoudamashii.jokersounds.com
+	SILHOUETTE DESIGN(シルエットデザイン)
+	http://kage-design.com/wp/?p=1055
 
-	ゆんフリー写真素材集
-	http://www.yunphoto.net
+	無料イラスト素材ドットコム
+	http://www.xn--eckzb3bzhw32znfcp1zduw.com/data/weather.php
+
+	地図アイコン無料素材
+	http://map-icon.com/transportation/transportation-dl-01.html

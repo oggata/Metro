@@ -18,6 +18,13 @@ var s_se_system          = "res/sound/se/se_maoudamashii_onepoint24.mp3";
 var s_se_001             = "res/sound/se/se_maoudamashii_onepoint12.mp3";
 var s_se_002             = "res/sound/se/se_maoudamashii_onepoint06.mp3";
 
+
+
+
+
+var s_sprite_station = "sprite/station.png";
+var s_sprite_rain    = "sprite/rain.png";
+
 var s_effect = "sprite/pipo-btleffect096.png";
 var s_rain   = "sprite/pipo-btleffect076.png";
 

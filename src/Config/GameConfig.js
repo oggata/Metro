@@ -8,7 +8,7 @@ CONFIG.SE_VOLUME   = 1;
 CONFIG.API_ENDPOINT   = 'https://api.tokyometroapp.jp/api/v2/';
 CONFIG.DATAPOINTS_URL = CONFIG.API_ENDPOINT + "datapoints?";
 CONFIG.PassengerSurvey_URL = "rdf:type=odpt:PassengerSurvey";
-CONFIG.ACCESS_TOKEN   = 'accesstoken';
+CONFIG.ACCESS_TOKEN   = 'f51607b1ea60bdb68d860e5ac63dc5f2f1705eb4a31abea04a0fe5aa2475100f';
 
 /*
 使用素材
